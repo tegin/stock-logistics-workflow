@@ -8,17 +8,18 @@ from odoo.exceptions import ValidationError
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
-    line_lot_name = fields.Char(
-        string='Lot Name',
-        compute='_compute_line_lot_name',
-        inverse='_inverse_line_lot_name',
-    )
     life_date = fields.Datetime(
         string='End of Life Date',
         help='This is the date on which the goods with this Serial Number may '
              'become dangerous and must not be consumed.',
         compute='_compute_life_date',
         inverse='_inverse_life_date',
+    )
+
+    line_lot_name = fields.Char(
+        string='Lot Name',
+        compute='_compute_line_lot_name',
+        inverse='_inverse_line_lot_name',
     )
 
     @api.onchange('line_lot_name')
